@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.util.Objects;
 import java.util.UUID;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Employee extends Person {
 	private UUID employeeId;
 	private Department department;
