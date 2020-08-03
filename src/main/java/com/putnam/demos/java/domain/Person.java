@@ -4,12 +4,12 @@ import java.time.LocalDate;
 import java.util.Objects;
 import java.util.UUID;
 
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 
-@Entity
+@MappedSuperclass
 public abstract class Person {
 	
 	@Id

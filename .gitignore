@@ -3,6 +3,9 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+mvmw
+mvmw.cmd
+.mvn/
 
 ### STS ###
 .apt_generated

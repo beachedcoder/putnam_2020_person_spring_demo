@@ -16,14 +16,15 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.putnam.demos.java.domain.Department;
 import com.putnam.demos.java.domain.Employee;
-import com.putnam.demos.java.repositories.EmployeeRepository;
+import com.putnam.demos.java.domain.SalaryEmployee;
+import com.putnam.demos.java.repositories.SalaryEmployeeRepository;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 class EmployeeRepositoryPersistanceDemoTests {
 	
 	@Autowired
-	private EmployeeRepository repoRef;
+	private SalaryEmployeeRepository repoRef;
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -36,9 +37,8 @@ class EmployeeRepositoryPersistanceDemoTests {
 	@Test
 	void proveCrudRepositoryStoresEmployee() {
 		
-		Employee currentEmp = new Employee("Java", "Java", LocalDate.of(1999, 1, 1), UUID.randomUUID(),
+		SalaryEmployee currentEmp = new SalaryEmployee("Java", "Java", LocalDate.of(1999, 1, 1), UUID.randomUUID(),
 				Department.SALES, 100, 200);
-		currentEmp.setEmployeeId(UUID.randomUUID());
 		
 		assertNotNull(this.repoRef, "repository auto injection failed to provided data context");
 		
@@ -51,17 +51,20 @@ class EmployeeRepositoryPersistanceDemoTests {
 	
 	@Test
 	void provedFindByIdCrudRepository() {
-		Employee currentEmp = new Employee("Georgia", "Java", LocalDate.of(1999, 1, 1), UUID.randomUUID(),
+		SalaryEmployee currentEmp = new SalaryEmployee("Georgia", "Java", LocalDate.of(1999, 1, 1), UUID.randomUUID(),
 				Department.SALES, 100, 200);
-		currentEmp.setEmployeeId(UUID.randomUUID());
+		
 		
 		assertNotNull(this.repoRef, "repository auto injection failed to provided data context");
 		
 		Employee rtnEmp = this.repoRef.save(currentEmp);
+		
 		assertNotNull(rtnEmp, "failed to get persistence state version of saved employee");
 		
-		Optional<Employee> foundEmp = this.repoRef.findById(rtnEmp.getId());
+		Optional<SalaryEmployee> foundEmp = this.repoRef.findById(rtnEmp.getId());
+		
 		assertTrue(foundEmp.isPresent(), "failed to find stored object");
+		
 		Employee foundActual = foundEmp.get();
 		
 		assertEquals(rtnEmp.getFirstName(), foundActual.getFirstName());
@@ -70,3 +73,16 @@ class EmployeeRepositoryPersistanceDemoTests {
 	
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

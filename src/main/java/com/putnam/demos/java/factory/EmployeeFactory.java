@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.putnam.demos.java.domain.Department;
 import com.putnam.demos.java.domain.Employee;
+import com.putnam.demos.java.domain.SalaryEmployee;
 
 @Component()
 public class EmployeeFactory implements SampleEmployeeFactory {
@@ -19,11 +20,10 @@ public class EmployeeFactory implements SampleEmployeeFactory {
 	}
 
 	@Override
-	public Employee getSampleEmployee() {
+	public SalaryEmployee getSampleEmployee() {
 		
-		Employee nueEmployee = new Employee("Georgia", "Java", LocalDate.of(1999, 7, 4), UUID.randomUUID(), Department.SALES,
+		SalaryEmployee nueEmployee = new SalaryEmployee("Georgia", "Java", LocalDate.of(1999, 7, 4), UUID.randomUUID(), Department.SALES,
 				670, 959);
-		nueEmployee.setEmployeeId(this.employeeFact);
 		return nueEmployee;
 	}
 

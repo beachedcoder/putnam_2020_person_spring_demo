@@ -1,16 +1,15 @@
 package com.putnam.demos.java.endpoints;
 
-import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.putnam.demos.java.domain.Department;
+import com.putnam.demos.java.configuration.ManagedProperitesBean;
 import com.putnam.demos.java.domain.Employee;
 import com.putnam.demos.java.factory.SampleEmployeeFactory;
 import com.putnam.demos.java.services.EmployeeManagementService;
@@ -23,6 +22,10 @@ public class EmployeeController {
 	private final SampleEmployeeFactory empFactory;
 	private final EmployeeService empSvc;
 	private final EmployeeManagementService empSvcImpl;
+	
+	@Autowired
+	@Qualifier("ftEmp")
+	private ManagedProperitesBean ftEmpProps;
 	
 	
 	public EmployeeController(SampleEmployeeFactory empFactory, EmployeeService svcRef, EmployeeManagementService empRepo) {

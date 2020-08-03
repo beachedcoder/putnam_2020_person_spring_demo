@@ -9,14 +9,14 @@ import javax.annotation.PreDestroy;
 import org.springframework.stereotype.Service;
 
 import com.putnam.demos.java.domain.Employee;
-import com.putnam.demos.java.repositories.EmployeeRepository;
+import com.putnam.demos.java.repositories.SalaryEmployeeRepository;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeManagementService {
 
-	private final EmployeeRepository empRepo;
+	private final SalaryEmployeeRepository empRepo;
 	
-	public EmployeeServiceImpl(EmployeeRepository repRef) {	
+	public EmployeeServiceImpl(SalaryEmployeeRepository repRef) {	
 		this.empRepo = repRef;
 	}
 
@@ -28,7 +28,7 @@ public class EmployeeServiceImpl implements EmployeeManagementService {
 
 	@Override
 	public Optional<Employee> getEmployeeByFirstNameAndDateOfBirth(String firstName, LocalDate dob) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 

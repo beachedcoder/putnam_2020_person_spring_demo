@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.putnam.demos.java.domain.Department;
 import com.putnam.demos.java.domain.Employee;
+import com.putnam.demos.java.domain.SalaryEmployee;
 
 @Service
 public class SampleEmployeeService implements EmployeeService {
@@ -19,8 +20,8 @@ public class SampleEmployeeService implements EmployeeService {
 	}
 
 	@Override
-	public Employee getEmployee() {
-		Employee newbieHire = new Employee("Janet", "Java", LocalDate.of(1999, 1, 1), UUID.randomUUID(), Department.VENDOR,
+	public SalaryEmployee getEmployee() {
+		SalaryEmployee newbieHire = new SalaryEmployee("Janet", "Java", LocalDate.of(1999, 1, 1), UUID.randomUUID(), Department.VENDOR,
 				202, 101);
 		newbieHire.setEmployeeId(this.svcId);
 		return newbieHire;
