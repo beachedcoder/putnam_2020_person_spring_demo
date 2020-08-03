@@ -4,20 +4,25 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import javax.annotation.PreDestroy;
+
 import org.springframework.stereotype.Service;
 
 import com.putnam.demos.java.domain.Employee;
+import com.putnam.demos.java.repositories.EmployeeRepository;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeManagementService {
 
-	public EmployeeServiceImpl() {
-		// TODO Auto-generated constructor stub
+	private final EmployeeRepository empRepo;
+	
+	public EmployeeServiceImpl(EmployeeRepository repRef) {	
+		this.empRepo = repRef;
 	}
 
 	@Override
 	public Employee createNewEmployee(Employee empRef) {
-		// TODO Auto-generated method stub
+		// TODO validate rules of employee object before storing in repository
 		return null;
 	}
 
@@ -32,6 +37,5 @@ public class EmployeeServiceImpl implements EmployeeManagementService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 
 }

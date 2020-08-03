@@ -1,6 +1,7 @@
 package com.putnam.demos.java.endpoints;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.putnam.demos.java.domain.Department;
 import com.putnam.demos.java.domain.Employee;
 import com.putnam.demos.java.factory.SampleEmployeeFactory;
+import com.putnam.demos.java.services.EmployeeManagementService;
 import com.putnam.demos.java.services.EmployeeService;
 
 @RestController
@@ -20,12 +22,24 @@ public class EmployeeController {
 	
 	private final SampleEmployeeFactory empFactory;
 	private final EmployeeService empSvc;
+	private final EmployeeManagementService empSvcImpl;
 	
 	
-	public EmployeeController(SampleEmployeeFactory empFactory, EmployeeService svcRef) {
+	public EmployeeController(SampleEmployeeFactory empFactory, EmployeeService svcRef, EmployeeManagementService empRepo) {
 		this.empFactory = empFactory;
 		this.empSvc = svcRef;
+		this.empSvcImpl = empRepo;
 	}
+	
+	@GetMapping("employees")
+	public ResponseEntity<List<Employee>> getCurrentEmployees() {
+		
+		return new ResponseEntity<List<Employee>>(
+				this.empSvcImpl.getAllEmployees()
+				, HttpStatus.OK);
+		
+	}
+	
 
 	@GetMapping("empservice")
 	public ResponseEntity<Employee> getServiceEmployee() {
