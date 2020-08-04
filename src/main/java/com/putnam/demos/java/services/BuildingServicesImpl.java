@@ -18,16 +18,15 @@ public class BuildingServicesImpl implements BuildingServices {
 
 	@Override
 	public Optional<Building> addNewLeasedLocation(Building location) {
-		// TODO verify doesn't already exist then validate floors (minimum 1 leased floor) then persist
-		if (location == null || location.getLocaleName().isBlank() || location.getTotalFloorsLeased()<1) {
-			Optional.empty();
+		if (location == null || location.getLocaleName() == null|| location.getLocaleName().isBlank() || location.getTotalFloorsLeased()<1) {
+			return Optional.empty();
 		}
 		return Optional.of(this.buildRepo.save(location));
 	}
 
 	@Override
 	public Optional<Building> findExistingLocation(String locationName) {
-		if (locationName ==null || locationName.isBlank()) {
+		if (locationName == null || locationName.isBlank()) {
 			return Optional.empty();
 		}
 		return this.buildRepo.findByLocaleName(locationName);

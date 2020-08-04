@@ -7,6 +7,12 @@ import com.putnam.demos.java.domain.Building;
 public class BuildingsDTO {
 	private List<Building> leaseHoldings;
 
+	
+	public BuildingsDTO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public BuildingsDTO(List<Building> holdings) {
 		this.leaseHoldings = holdings;
 	}

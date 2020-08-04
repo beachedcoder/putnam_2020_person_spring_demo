@@ -5,6 +5,12 @@ public class ErrorMessage {
 	private int errorCode;
 	private String errorSummary;
 
+	
+	public ErrorMessage() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public ErrorMessage(int errorCode, String errorSummary) {
 		this.errorCode = errorCode;
 		this.errorSummary = errorSummary;
