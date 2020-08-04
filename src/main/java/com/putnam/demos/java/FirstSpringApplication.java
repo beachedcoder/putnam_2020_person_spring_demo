@@ -9,11 +9,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import com.putnam.demos.java.domain.Building;
 import com.putnam.demos.java.domain.Department;
 import com.putnam.demos.java.domain.Employee;
 import com.putnam.demos.java.domain.PartTimeEmployee;
 import com.putnam.demos.java.domain.SalaryEmployee;
 import com.putnam.demos.java.repositories.SalaryEmployeeRepository;
+import com.putnam.demos.java.repositories.BuildingRepository;
 import com.putnam.demos.java.repositories.PartTimeEmployeeRepository;
 
 @SpringBootApplication
@@ -62,6 +64,18 @@ public class FirstSpringApplication {
 							new PartTimeEmployee("Tracy", "Grillo", LocalDate.of(1999, 2, 1), UUID.randomUUID(), 99.99f,40.0f)
 							
 					));
+		};
+	}
+	
+	@Bean
+	public CommandLineRunner initBuildings(BuildingRepository dbRepo) {
+		return (args) -> {
+			dbRepo.saveAll(
+					Arrays.asList(
+							new Building("Federal Plaza", 14),
+							new Building("One Water", 32),
+							new Building("Coco Exchange", 45)
+							));
 		};
 	}
 	

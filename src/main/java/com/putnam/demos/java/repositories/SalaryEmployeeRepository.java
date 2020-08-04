@@ -12,6 +12,6 @@ import com.putnam.demos.java.domain.SalaryEmployee;
 @Repository
 public interface SalaryEmployeeRepository extends CrudRepository<SalaryEmployee, Long> {
 	
-	Optional<SalaryEmployee> findEmployeeByFirstNameAndDateOfBirth(String firstName, LocalDate dateOfBirth);
+	Optional<SalaryEmployee> findByFirstNameAndDateOfBirth(String firstName, LocalDate dateOfBirth);
 	
 }
