@@ -3,6 +3,8 @@ package com.putnam.demos.java.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 
 import com.putnam.demos.java.domain.Building;
@@ -16,6 +18,7 @@ public class BuildingServicesImpl implements BuildingServices {
 		this.buildRepo = dbRef;
 	}
 
+	@Transactional
 	@Override
 	public Optional<Building> addNewLeasedLocation(Building location) {
 		if (location == null || location.getLocaleName() == null|| location.getLocaleName().isBlank() || location.getTotalFloorsLeased()<1) {
@@ -35,7 +38,7 @@ public class BuildingServicesImpl implements BuildingServices {
 	@Override
 	public Optional<Building> findExistingLocation(long id) {
 		if(id>0) {
-		return this.buildRepo.findById(id);
+		return this.buildRepo.findById(Long.valueOf(id));
 		}
 		return Optional.empty();
 	}

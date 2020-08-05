@@ -22,12 +22,23 @@ public class BuildingDtoServiceImpl implements BuildingDtoService {
 
 	@Override
 	public Optional<BuildingDto> addNewLeasedBuilding(BuildingDto newLocale) {
+		//TODO add validation exception plan
 		Building buildingEntity = this.mapper.convert(newLocale, Building.class);
 		Optional<Building> peristedBuilding = this.maintenance.addNewLeasedLocation(buildingEntity);
 		if (peristedBuilding.isEmpty()) {
 			return Optional.empty();			
 		}
 		return Optional.of(this.mapper.convert(peristedBuilding.get(),BuildingDto.class));
+	}
+
+	@Override
+	public Optional<BuildingDto> fetchLocaleById(long id) {
+		//TODO add exception plan for validation
+		Optional<Building> foundIt = this.maintenance.findExistingLocation(id);
+		if (foundIt.isEmpty()) {
+			return Optional.empty();
+		}
+		return Optional.of(this.mapper.convert(foundIt.get(),BuildingDto.class ));
 	}
 
 }

@@ -31,6 +31,7 @@ public class ErrorMessage {
 	public void setErrorSummary(String errorSummary) {
 		this.errorSummary = errorSummary;
 	}
+
 	
 	
 
