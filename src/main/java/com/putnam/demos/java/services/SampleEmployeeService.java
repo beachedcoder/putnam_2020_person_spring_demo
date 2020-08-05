@@ -6,7 +6,6 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 
 import com.putnam.demos.java.domain.Department;
-import com.putnam.demos.java.domain.Employee;
 import com.putnam.demos.java.domain.SalaryEmployee;
 
 @Service

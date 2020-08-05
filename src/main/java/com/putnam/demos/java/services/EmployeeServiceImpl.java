@@ -4,12 +4,10 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-import javax.annotation.PreDestroy;
-
-import org.springframework.stereotype.Service;
-
 import com.putnam.demos.java.domain.Employee;
 import com.putnam.demos.java.repositories.SalaryEmployeeRepository;
+
+import org.springframework.stereotype.Service;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeManagementService {

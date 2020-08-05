@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-import com.putnam.demos.java.domain.Building;
-
 public class BuildingsDTO {
 	private List<BuildingDto> leaseHoldings;
 	private LocalDateTime lastRetrieval;

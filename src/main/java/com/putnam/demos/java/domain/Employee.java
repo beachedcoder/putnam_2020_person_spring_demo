@@ -1,10 +1,8 @@
 package com.putnam.demos.java.domain;
 
 import java.time.LocalDate;
-import java.util.Objects;
 import java.util.UUID;
 
-import javax.persistence.Entity;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
