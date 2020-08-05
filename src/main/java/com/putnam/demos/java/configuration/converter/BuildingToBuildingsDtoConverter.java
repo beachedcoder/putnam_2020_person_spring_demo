@@ -1,12 +1,12 @@
 package com.putnam.demos.java.configuration.converter;
 
+import java.util.List;
+
 import com.putnam.demos.java.domain.Building;
 import com.putnam.demos.java.domain.dto.BuildingDto;
 import com.putnam.demos.java.domain.dto.BuildingsDto;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.converter.Converter;
-
-import java.util.List;
 
 public class BuildingToBuildingsDtoConverter implements Converter<List<Building>, BuildingsDto> {
 

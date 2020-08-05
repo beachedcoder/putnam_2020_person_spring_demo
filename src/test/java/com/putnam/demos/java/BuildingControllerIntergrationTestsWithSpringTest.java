@@ -1,12 +1,20 @@
 package com.putnam.demos.java;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.Collection;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.putnam.demos.java.domain.Building;
+import com.putnam.demos.java.domain.dto.BuildingsDto;
+import com.putnam.demos.java.repositories.BuildingRepository;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,12 +29,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.putnam.demos.java.domain.Building;
-import com.putnam.demos.java.domain.dto.BuildingsDto;
-import com.putnam.demos.java.repositories.BuildingRepository;
 @SpringBootTest
 @AutoConfigureMockMvc
 class BuildingControllerIntergrationTestsWithSpringTest {
@@ -96,7 +98,7 @@ class BuildingControllerIntergrationTestsWithSpringTest {
 	void addNewLeaseHoldBuildingWithBadNames(String badName) throws Exception {
 		Building rqBuilding = new Building(badName, 1);
 		
-		MvcResult rspMsg =
+		
 		this.context.perform(
 				post("/building").accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON)
 				.content(this.objMapper.writeValueAsString(rqBuilding))
@@ -105,12 +107,12 @@ class BuildingControllerIntergrationTestsWithSpringTest {
 		.andDo(print())
 		.andReturn();
 	}
+	
 	@ParameterizedTest
 	@ValueSource(ints = {0, -1, -42})
 	void addNewLeaseHoldBuildingWithBadNames(int badLease) throws Exception {
 		Building rqBuilding = new Building("Never Persisted", badLease);
 		
-		MvcResult rspMsg =
 		this.context.perform(
 				post("/building").accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON)
 				.content(this.objMapper.writeValueAsString(rqBuilding))

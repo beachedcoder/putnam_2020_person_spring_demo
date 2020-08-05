@@ -13,6 +13,7 @@ public class Building {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+
 	private String localeName;
 	private int totalFloorsLeased;
 

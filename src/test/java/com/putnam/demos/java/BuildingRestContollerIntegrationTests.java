@@ -1,9 +1,15 @@
 package com.putnam.demos.java;
 
-import static io.restassured.RestAssured.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static io.restassured.RestAssured.given;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
+
+import com.putnam.demos.java.domain.Building;
+import com.putnam.demos.java.domain.boundary.ErrorMessage;
+import com.putnam.demos.java.domain.dto.BuildingsDto;
+import com.putnam.demos.java.repositories.BuildingRepository;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,11 +22,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-
-import com.putnam.demos.java.domain.Building;
-import com.putnam.demos.java.domain.boundary.ErrorMessage;
-import com.putnam.demos.java.domain.dto.BuildingsDto;
-import com.putnam.demos.java.repositories.BuildingRepository;
 
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
 class BuildingRestContollerIntegrationTests {
