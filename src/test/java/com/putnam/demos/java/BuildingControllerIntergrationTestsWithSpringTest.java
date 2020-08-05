@@ -109,6 +109,7 @@ class BuildingControllerIntergrationTestsWithSpringTest {
 		.andDo(print())
 		.andReturn();
 	}
+	
 	@ParameterizedTest
 	@ValueSource(ints = {0, -1, -42})
 	void addNewLeaseHoldBuildingWithBadNames(int badLease) throws Exception {

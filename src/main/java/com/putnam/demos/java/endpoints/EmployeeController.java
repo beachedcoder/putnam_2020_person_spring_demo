@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.putnam.demos.java.configuration.ManagedProperitesBean;
 import com.putnam.demos.java.domain.Employee;
-import com.putnam.demos.java.factory.SampleEmployeeFactory;
 import com.putnam.demos.java.services.EmployeeManagementService;
 import com.putnam.demos.java.services.EmployeeService;
 
@@ -19,7 +18,6 @@ import com.putnam.demos.java.services.EmployeeService;
 //TODO add base mapping
 public class EmployeeController {
 	
-	private final SampleEmployeeFactory empFactory;
 	private final EmployeeService empSvc;
 	private final EmployeeManagementService empSvcImpl;
 	
@@ -28,8 +26,8 @@ public class EmployeeController {
 	private ManagedProperitesBean ftEmpProps;
 	
 	
-	public EmployeeController(SampleEmployeeFactory empFactory, EmployeeService svcRef, EmployeeManagementService empRepo) {
-		this.empFactory = empFactory;
+	public EmployeeController( EmployeeService svcRef, EmployeeManagementService empRepo) {
+
 		this.empSvc = svcRef;
 		this.empSvcImpl = empRepo;
 	}
@@ -49,15 +47,6 @@ public class EmployeeController {
 		
 		return new ResponseEntity<Employee>(
 				this.empSvc.getEmployee()
-				, HttpStatus.CREATED);
-		
-	}
-
-	@GetMapping("empsample")
-	public ResponseEntity<Employee> getSampleEmployee() {
-		
-		return new ResponseEntity<Employee>(
-				this.empFactory.getSampleEmployee()
 				, HttpStatus.CREATED);
 		
 	}
