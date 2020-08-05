@@ -58,6 +58,12 @@ public class BuildingController {
 		}
 		return new ResponseEntity<Building>(persistedBuilding.get(), HttpStatus.CREATED);
 	}
+
+	//TODO finish then during class
+	@GetMapping(value = "buildingdto/{name}",produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> findLeaseHoldLocationByCommonName(@PathVariable(value = "name")String buildingName){
+		return null;
+	}
 	
 	@GetMapping(value="buildingdto/{assetid}",produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> findleaseHoldLocation(@PathVariable(value = "assetid") long id){
