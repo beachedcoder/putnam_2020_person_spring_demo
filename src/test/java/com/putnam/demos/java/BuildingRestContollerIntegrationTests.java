@@ -1,31 +1,25 @@
 package com.putnam.demos.java;
 
 import static io.restassured.RestAssured.*;
-import static io.restassured.matcher.RestAssuredMatchers.*;
-import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
-import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.test.annotation.DirtiesContext;
 
 import com.putnam.demos.java.domain.Building;
 import com.putnam.demos.java.domain.boundary.ErrorMessage;
-import com.putnam.demos.java.domain.dto.BuildingsDTO;
+import com.putnam.demos.java.domain.dto.BuildingsDto;
 import com.putnam.demos.java.repositories.BuildingRepository;
 
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
@@ -47,13 +41,13 @@ class BuildingRestContollerIntegrationTests {
 
 	@Test
 	void testGetAllBuildings() {
-		BuildingsDTO rtnValue =		
+		BuildingsDto rtnValue =
 		given().accept(MediaType.APPLICATION_JSON_VALUE)
 		.when().get("/buildings")
 		.then()
 		.statusCode(HttpStatus.ACCEPTED.value())
 		.and()
-		.extract().as(BuildingsDTO.class);
+		.extract().as(BuildingsDto.class);
 		
 		assertTrue(rtnValue.getLeaseHoldings().size() > 0);
 //		assertIterableEquals(currentHoldings, rtnValue.getLeaseHoldings());

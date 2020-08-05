@@ -6,13 +6,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-import com.putnam.demos.java.domain.Building;
-
-public class BuildingsDTO {
+public class BuildingsDto {
 	private List<BuildingDto> leaseHoldings;
 	private LocalDateTime lastRetrieval;
 	
-	public BuildingsDTO() {
+	public BuildingsDto() {
 		super();
 		this.leaseHoldings = new ArrayList<>();
 		this.lastRetrieval = LocalDateTime.now();
@@ -41,8 +39,8 @@ public class BuildingsDTO {
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
-		if (!(o instanceof BuildingsDTO)) return false;
-		BuildingsDTO that = (BuildingsDTO) o;
+		if (!(o instanceof BuildingsDto)) return false;
+		BuildingsDto that = (BuildingsDto) o;
 		return getLeaseHoldings().equals(that.getLeaseHoldings()) &&
 				getLastRetrieval().equals(that.getLastRetrieval());
 	}
@@ -54,7 +52,7 @@ public class BuildingsDTO {
 
 	@Override
 	public String toString() {
-		return new StringJoiner(", ", BuildingsDTO.class.getSimpleName() + "[", "]")
+		return new StringJoiner(", ", BuildingsDto.class.getSimpleName() + "[", "]")
 				.add("leaseHoldings=" + leaseHoldings)
 				.add("lastRetrieval=" + lastRetrieval)
 				.toString();

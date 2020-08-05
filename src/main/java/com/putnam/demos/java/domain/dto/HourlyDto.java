@@ -1,4 +1,4 @@
 package com.putnam.demos.java.domain.dto;
 
-public class HourlyDTO {
+public class HourlyDto {
 }
