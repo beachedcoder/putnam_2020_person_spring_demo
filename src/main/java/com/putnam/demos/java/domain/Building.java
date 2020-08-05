@@ -13,7 +13,6 @@ public class Building {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-//	@Pattern("^\\w(2,40)$",message="name of buiding doesnt meet criteria")
 	private String localeName;
 	private int totalFloorsLeased;
 
@@ -28,6 +27,11 @@ public class Building {
 		this.totalFloorsLeased = totalFloorsLeased;
 	}
 
+	public Building(long id, String localeName, int totalFloorsLeased) {
+		this.id = id;
+		this.localeName = localeName;
+		this.totalFloorsLeased = totalFloorsLeased;
+	}
 
 	public long getId() {
 		return id;

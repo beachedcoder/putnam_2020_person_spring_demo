@@ -3,6 +3,8 @@ package com.putnam.demos.java.endpoints;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -21,16 +23,18 @@ import com.putnam.demos.java.services.BuildingServices;
 public class BuildingController {
 
 	private BuildingServices buildSvc;
+	private ConversionService mapper;
 	
-	public BuildingController(BuildingServices bSvc) {
+	public BuildingController(BuildingServices bSvc, @Qualifier("dtoMapper") ConversionService typConverter) {
 		this.buildSvc = bSvc;
+		this.mapper = typConverter;
 	}
 	
 	// fetch a building, all buildings, add building update building
 	@GetMapping(value = "buildings", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity getAllBuildings(){
-		return new ResponseEntity<BuildingsDTO>( 
-				new BuildingsDTO(this.buildSvc.getCurrentLeasedLocations())
+		return new ResponseEntity<BuildingsDTO>(
+				this.mapper.convert(this.buildSvc.getCurrentLeasedLocations(),BuildingsDTO.class)
 				, HttpStatus.ACCEPTED);
 	}
 	
