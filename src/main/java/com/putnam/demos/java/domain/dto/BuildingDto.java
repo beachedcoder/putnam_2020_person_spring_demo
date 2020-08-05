@@ -3,9 +3,18 @@ package com.putnam.demos.java.domain.dto;
 import java.util.Objects;
 import java.util.StringJoiner;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
+
 public class BuildingDto {
+	
+	@Min(value = 1)
     private long assetId;
+	
+	@Pattern(regexp = "^\\w(2,40)$")
     private String mapName;
+    
+    @Min(value = 1)
     private int leasedFloors;
 
     public BuildingDto() {
