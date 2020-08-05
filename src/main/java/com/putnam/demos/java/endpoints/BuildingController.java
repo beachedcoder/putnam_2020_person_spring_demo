@@ -91,8 +91,8 @@ public class BuildingController {
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> updateCurrentLeaseHoldBuilding(@Valid @RequestBody BuildingDto updateLocale){
 		Optional<BuildingDto> updatedDto = this.buildDtoSvc.updateExistingLocale(updateLocale);
-		
-		return null;
+		//TODO add error logic
+		return new ResponseEntity<BuildingDto>(updatedDto.get(), HttpStatus.ACCEPTED);
 	}
 	
 	

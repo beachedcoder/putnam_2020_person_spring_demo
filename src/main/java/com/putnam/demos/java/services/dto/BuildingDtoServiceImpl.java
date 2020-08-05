@@ -45,8 +45,8 @@ public class BuildingDtoServiceImpl implements BuildingDtoService {
 
 	@Override
 	public Optional<BuildingDto> updateExistingLocale( BuildingDto updateLocale) {
-		Optional<Building> updatedBuilding = this.maintenance.modifyExistingLeaseHold(this.mapper.convert(updateLocale, Building.class));
-		return null;
+		Building updatedBuilding = this.maintenance.modifyExistingLeaseHold(this.mapper.convert(updateLocale, Building.class));
+		return Optional.of(this.mapper.convert(updatedBuilding, BuildingDto.class));
 	}
 
 }

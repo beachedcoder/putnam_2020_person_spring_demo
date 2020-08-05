@@ -50,9 +50,8 @@ public class BuildingServicesImpl implements BuildingServices {
 
 	@Transactional
 	@Override
-	public Optional<Building> modifyExistingLeaseHold(Building existingBuilding) {
-		//TODO finish in morning
-		return null;
+	public Building modifyExistingLeaseHold(Building existingBuilding) {
+		return this.buildRepo.save(existingBuilding);
 	}
 
 }
