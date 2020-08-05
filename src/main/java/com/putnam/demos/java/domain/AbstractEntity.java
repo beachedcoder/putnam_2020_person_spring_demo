@@ -1,8 +1,6 @@
 package com.putnam.demos.java.domain;
 
 
-import java.io.PrintStream;
-
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
