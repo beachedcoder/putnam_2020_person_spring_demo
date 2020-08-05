@@ -8,13 +8,13 @@ import javax.validation.constraints.Pattern;
 
 public class BuildingDto {
 	
-	@Min(value = 1)
+	@Min(value = 1, message = "minimum asset Id value must be one")
     private long assetId;
 	
-	@Pattern(regexp = "^\\w(2,40)$")
+	@Pattern(regexp = "^[\\w\\s]{2,40}$", message = "name of building on map must be word characters not exceeding forty")
     private String mapName;
     
-    @Min(value = 1)
+    @Min(value = 1, message = "buildings require one or more floors to be leased prior to adding as leased asset")
     private int leasedFloors;
 
     public BuildingDto() {
