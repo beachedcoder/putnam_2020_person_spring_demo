@@ -4,19 +4,18 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.UUID;
 
+import com.putnam.demos.java.domain.Building;
+import com.putnam.demos.java.domain.Department;
+import com.putnam.demos.java.domain.PartTimeEmployee;
+import com.putnam.demos.java.domain.SalaryEmployee;
+import com.putnam.demos.java.repositories.BuildingRepository;
+import com.putnam.demos.java.repositories.PartTimeEmployeeRepository;
+import com.putnam.demos.java.repositories.SalaryEmployeeRepository;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
-import com.putnam.demos.java.domain.Building;
-import com.putnam.demos.java.domain.Department;
-import com.putnam.demos.java.domain.Employee;
-import com.putnam.demos.java.domain.PartTimeEmployee;
-import com.putnam.demos.java.domain.SalaryEmployee;
-import com.putnam.demos.java.repositories.SalaryEmployeeRepository;
-import com.putnam.demos.java.repositories.BuildingRepository;
-import com.putnam.demos.java.repositories.PartTimeEmployeeRepository;
 
 @SpringBootApplication
 public class FirstSpringApplication {
