@@ -2,6 +2,8 @@ package com.putnam.demos.java.services.dto;
 
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
@@ -39,6 +41,12 @@ public class BuildingDtoServiceImpl implements BuildingDtoService {
 			return Optional.empty();
 		}
 		return Optional.of(this.mapper.convert(foundIt.get(),BuildingDto.class ));
+	}
+
+	@Override
+	public Optional<BuildingDto> updateExistingLocale( BuildingDto updateLocale) {
+		Optional<Building> updatedBuilding = this.maintenance.modifyExistingLeaseHold(this.mapper.convert(updateLocale, Building.class));
+		return null;
 	}
 
 }

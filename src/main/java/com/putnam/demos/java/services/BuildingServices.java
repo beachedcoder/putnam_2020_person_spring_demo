@@ -11,5 +11,6 @@ public interface BuildingServices {
 	Optional<Building> findExistingLocation(String locationName);
 	Optional<Building> findExistingLocation(long id);
 	List<Building> getCurrentLeasedLocations();
+	Optional<Building> modifyExistingLeaseHold(Building existingBuilding);
 	
 }

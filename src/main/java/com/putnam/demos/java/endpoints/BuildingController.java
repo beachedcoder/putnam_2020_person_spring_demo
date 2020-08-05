@@ -4,13 +4,6 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
-import com.putnam.demos.java.domain.Building;
-import com.putnam.demos.java.domain.boundary.ErrorMessage;
-import com.putnam.demos.java.domain.dto.BuildingDto;
-import com.putnam.demos.java.domain.dto.BuildingsDTO;
-import com.putnam.demos.java.services.BuildingServices;
-import com.putnam.demos.java.services.dto.BuildingDtoService;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -22,11 +15,22 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.putnam.demos.java.domain.Building;
+import com.putnam.demos.java.domain.boundary.ErrorMessage;
+import com.putnam.demos.java.domain.dto.BuildingDto;
+import com.putnam.demos.java.domain.dto.BuildingsDTO;
+import com.putnam.demos.java.services.BuildingServices;
+import com.putnam.demos.java.services.dto.BuildingDtoService;
 
-@RestController
+
+@RestController()
+@RequestMapping("api/v20")
 public class BuildingController {
 	private Logger log = LoggerFactory.getLogger(BuildingController.class);
 	private BuildingServices buildSvc;
@@ -60,14 +64,14 @@ public class BuildingController {
 	}
 
 	//TODO finish then during class
-	@GetMapping(value = "buildingdto/{name}",produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> findLeaseHoldLocationByCommonName(@PathVariable(value = "name")String buildingName){
+	@GetMapping(value = "buildingdto",produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> findLeaseHoldLocationByCommonName(@RequestParam(value = "name")String buildingName){
 		return null;
 	}
 	
 	@GetMapping(value="buildingdto/{assetid}",produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> findleaseHoldLocation(@PathVariable(value = "assetid") long id){
-		log.warn(String.format("buildingdto/%s called", id));
+		log.info(String.format("buildingdto/%s called", id));
 		if (id < 1) {
 			return new ResponseEntity<ErrorMessage>( 
 					new ErrorMessage( HttpStatus.NOT_ACCEPTABLE.value(),"must provide good asset location id for detail lookup"),
@@ -81,6 +85,16 @@ public class BuildingController {
 		}
 		return new ResponseEntity<BuildingDto>(foundLocale.get(), HttpStatus.FOUND);
 	}
+	
+	
+	@PutMapping(value = "buildingdto", consumes = MediaType.APPLICATION_JSON_VALUE,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> updateCurrentLeaseHoldBuilding(@Valid @RequestBody BuildingDto updateLocale){
+		Optional<BuildingDto> updatedDto = this.buildDtoSvc.updateExistingLocale(updateLocale);
+		
+		return null;
+	}
+	
 	
 	@PostMapping(value = "buildingdto",consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = MediaType.APPLICATION_JSON_VALUE)

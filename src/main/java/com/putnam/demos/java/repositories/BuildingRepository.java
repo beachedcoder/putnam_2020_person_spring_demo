@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BuildingRepository extends CrudRepository<Building, Long> {
 	Optional<Building> findByLocaleName(String localeName);
+	//TODO updateExistingViaJpa
 }
