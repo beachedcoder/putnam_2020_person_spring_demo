@@ -3,16 +3,9 @@ package com.putnam.demos.java.domain;
 import java.util.Objects;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 @Entity
-public class Building {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+public class Building extends AbstractEntity {
 
 	private String localeName;
 	private int totalFloorsLeased;
@@ -20,7 +13,6 @@ public class Building {
 	public Building() {
 		super();
 	}
-	
 
 	public Building(String localeName, int totalFloorsLeased) {
 		this();
@@ -29,20 +21,9 @@ public class Building {
 	}
 
 	public Building(long id, String localeName, int totalFloorsLeased) {
-		this.id = id;
-		this.localeName = localeName;
-		this.totalFloorsLeased = totalFloorsLeased;
+		this(localeName, totalFloorsLeased);
+		this.setId(Long.valueOf(id));
 	}
-
-	public long getId() {
-		return id;
-	}
-
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
 
 	public String getLocaleName() {
 		return localeName;
@@ -66,7 +47,7 @@ public class Building {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, localeName, totalFloorsLeased);
+		return Objects.hash(getId(), localeName, totalFloorsLeased);
 	}
 
 
@@ -77,14 +58,14 @@ public class Building {
 		if (!(obj instanceof Building))
 			return false;
 		Building other = (Building) obj;
-		return id == other.id && Objects.equals(localeName, other.localeName)
+		return getId().equals(other.getId()) && Objects.equals(localeName, other.localeName)
 				&& totalFloorsLeased == other.totalFloorsLeased;
 	}
 
 
 	@Override
 	public String toString() {
-		return String.format("Building [id=%s, localeName=%s, totalFloorsLeased=%s]", id, localeName,
+		return String.format("Building [id=%s, localeName=%s, totalFloorsLeased=%s]", getId(), localeName,
 				totalFloorsLeased);
 	}
 	

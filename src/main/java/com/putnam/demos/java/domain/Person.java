@@ -10,11 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public abstract class Person {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+public abstract class Person extends AbstractEntity {
 	
 	private String firstName;
 	private String lastName;
@@ -32,14 +28,6 @@ public abstract class Person {
 		this.lastName = lastName;
 		this.dateOfBirth = dateOfBirth;
 		this.pid = pid;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	public String getFirstName() {
@@ -76,7 +64,7 @@ public abstract class Person {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(dateOfBirth, firstName, id, lastName, pid);
+		return Objects.hash(dateOfBirth, firstName, getId(), lastName, pid);
 	}
 
 	@Override
@@ -87,12 +75,12 @@ public abstract class Person {
 			return false;
 		Person other = (Person) obj;
 		return Objects.equals(dateOfBirth, other.dateOfBirth) && Objects.equals(firstName, other.firstName)
-				&& id == other.id && Objects.equals(lastName, other.lastName) && Objects.equals(pid, other.pid);
+				&& getId().equals(other.getId()) && Objects.equals(lastName, other.lastName) && Objects.equals(pid, other.pid);
 	}
 
 	@Override
 	public String toString() {
-		return String.format("Person [id=%s, firstName=%s, lastName=%s, dateOfBirth=%s, pid=%s]", id, firstName,
+		return String.format("Person [id=%s, firstName=%s, lastName=%s, dateOfBirth=%s, pid=%s]", getId(), firstName,
 				lastName, dateOfBirth, pid);
 	}
 
