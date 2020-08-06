@@ -1,16 +1,15 @@
 package com.putnam.demos.java;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-
+import com.putnam.demos.java.repositories.BuildingRepository;
+import com.putnam.demos.java.services.BuildingServicesImpl;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.putnam.demos.java.repositories.BuildingRepository;
-import com.putnam.demos.java.services.BuildingServicesImpl;
-@SpringBootTest
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.mockito.Mockito.mock;
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 class BuildingServiceImplTests {
 
 	private BuildingServicesImpl svcFixture;

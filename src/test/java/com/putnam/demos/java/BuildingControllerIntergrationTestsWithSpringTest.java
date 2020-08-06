@@ -32,8 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 @SpringBootTest
 @AutoConfigureMockMvc
-class BuildingControllerIntergrationTestsWithSpringTest {
-	private final String BASE_URL = "/api/v20/";
+class BuildingControllerIntergrationTestsWithSpringTest extends CommonTestSettings {
 
 	private Logger log = LoggerFactory.getLogger(BuildingControllerIntergrationTestsWithSpringTest.class);
 	@Autowired
