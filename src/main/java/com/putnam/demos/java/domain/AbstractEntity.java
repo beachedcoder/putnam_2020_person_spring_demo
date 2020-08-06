@@ -1,16 +1,11 @@
 package com.putnam.demos.java.domain;
 
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.PostLoad;
-import javax.persistence.PostPersist;
-import javax.persistence.PostUpdate;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.domain.Persistable;
+
+import javax.persistence.*;
 
 
 @MappedSuperclass
@@ -20,7 +15,7 @@ public abstract class AbstractEntity implements Persistable<Long> {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+	@JsonIgnore
 	@Transient
 	private boolean isNew = true;
 	

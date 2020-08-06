@@ -1,5 +1,10 @@
 package com.putnam.demos.java.domain.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.deser.std.DateDeserializers;
+import com.fasterxml.jackson.databind.ser.std.DateSerializer;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,8 +13,11 @@ import java.util.StringJoiner;
 
 public class BuildingsDto {
 	private List<BuildingDto> leaseHoldings;
-	private LocalDateTime lastRetrieval;
 	
+	@JsonDeserialize(using = DateDeserializers.DateDeserializer.class)
+    @JsonSerialize(using = DateSerializer.class)
+	private LocalDateTime lastRetrieval;
+		
 	public BuildingsDto() {
 		super();
 		this.leaseHoldings = new ArrayList<>();
