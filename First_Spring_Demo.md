@@ -8,3 +8,6 @@
 - Kate
 - Ryan
 - Mackenzie
+
+
+[Picture of the Day](https://www.bing.com/)
