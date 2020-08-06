@@ -1,9 +1,7 @@
 package com.putnam.demos.java.domain.dto;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.deser.std.DateDeserializers;
-import com.fasterxml.jackson.databind.ser.std.DateSerializer;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -13,9 +11,8 @@ import java.util.StringJoiner;
 
 public class BuildingsDto {
 	private List<BuildingDto> leaseHoldings;
-	
-	@JsonDeserialize(using = DateDeserializers.DateDeserializer.class)
-    @JsonSerialize(using = DateSerializer.class)
+
+
 	private LocalDateTime lastRetrieval;
 		
 	public BuildingsDto() {
@@ -40,8 +37,14 @@ public class BuildingsDto {
 		return lastRetrieval;
 	}
 
+
 	public void setLastRetrieval(LocalDateTime lastRetrieval) {
 		this.lastRetrieval = lastRetrieval;
+	}
+
+	@JsonCreator()
+	public void setLastRetrieval(@JsonProperty("lastRetrieval") String lastRetrieval){
+		this.setLastRetrieval(LocalDateTime.parse(lastRetrieval));
 	}
 
 	@Override

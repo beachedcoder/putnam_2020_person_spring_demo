@@ -1,21 +1,10 @@
 package com.putnam.demos.java;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import java.util.Collection;
-
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.putnam.demos.java.domain.Building;
 import com.putnam.demos.java.domain.dto.BuildingsDto;
 import com.putnam.demos.java.repositories.BuildingRepository;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,21 +12,39 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+
+import java.util.Collection;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 @SpringBootTest
 @AutoConfigureMockMvc
 class BuildingControllerIntergrationTestsWithSpringTest {
+	private final String BASE_URL = "/api/v20/";
 
+	private Logger log = LoggerFactory.getLogger(BuildingControllerIntergrationTestsWithSpringTest.class);
 	@Autowired
 	private MockMvc context;
 	
 	@Autowired
 	private BuildingRepository buildRepo;
+
+	@Autowired
+	@Qualifier("dtoMapper")
+	private ConversionService mapper;
 	
 	private ObjectMapper objMapper;
 
@@ -58,7 +65,7 @@ class BuildingControllerIntergrationTestsWithSpringTest {
 	@Test
 	void testGetAllBuildings() throws Exception {
 		MvcResult rspMsg =
-		this.context.perform(get("/buildings")).andDo(print()).andExpect(status().is2xxSuccessful())
+		this.context.perform(get(this.BASE_URL+"buildings")).andDo(print()).andExpect(status().is2xxSuccessful())
 		.andReturn();
 		
 		BuildingsDto rtnDto = objMapper.readValue(
@@ -66,8 +73,9 @@ class BuildingControllerIntergrationTestsWithSpringTest {
 				new TypeReference<BuildingsDto>() {}
 				);
 		assertNotNull(rtnDto,"failed to parse return object to DTO");
-		
-		assertTrue(rtnDto.getLeaseHoldings().containsAll(currentBuildings));
+		BuildingsDto expectedRtn = this.mapper.convert(this.currentBuildings,BuildingsDto.class);
+
+		assertTrue(rtnDto.getLeaseHoldings().containsAll(expectedRtn.getLeaseHoldings()));
 		
 	}
 
@@ -77,7 +85,7 @@ class BuildingControllerIntergrationTestsWithSpringTest {
 		
 		MvcResult rspMsg =
 		this.context.perform(
-				post("/building").accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON)
+				post(this.BASE_URL+"building").accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON)
 				.content(this.objMapper.writeValueAsString(rqBuilding))
 				).andDo(print())
 		.andReturn();
@@ -100,7 +108,7 @@ class BuildingControllerIntergrationTestsWithSpringTest {
 		
 		
 		this.context.perform(
-				post("/building").accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON)
+				post(this.BASE_URL+"/building").accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON)
 				.content(this.objMapper.writeValueAsString(rqBuilding))
 				)
 		.andExpect(status().isBadRequest())
@@ -114,7 +122,7 @@ class BuildingControllerIntergrationTestsWithSpringTest {
 		Building rqBuilding = new Building("Never Persisted", badLease);
 		
 		this.context.perform(
-				post("/building").accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON)
+				post(this.BASE_URL+"building").accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON)
 				.content(this.objMapper.writeValueAsString(rqBuilding))
 				)
 		.andExpect(status().isBadRequest())

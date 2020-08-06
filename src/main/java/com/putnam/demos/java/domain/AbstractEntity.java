@@ -15,7 +15,8 @@ public abstract class AbstractEntity implements Persistable<Long> {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	@JsonIgnore
+
+
 	@Transient
 	private boolean isNew = true;
 	
@@ -26,7 +27,8 @@ public abstract class AbstractEntity implements Persistable<Long> {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
+	@JsonIgnore
 	@Override
 	public boolean isNew() {
 		return isNew;
